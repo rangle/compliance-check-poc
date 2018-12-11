@@ -6,3 +6,5 @@ export const isBetween = (min, max) => value => {
 };
 
 export const isString = value => !isEmpty(value) && R.is(String, value);
+// eslint-disable-next-line no-useless-escape
+export const isTax = value => /^\d{9}\b|\d{3}\-{1}\d{2}\-{1}\d{4}\b/.test(value);
