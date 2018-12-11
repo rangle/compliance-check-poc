@@ -1,4 +1,6 @@
-import { checkDefaultRules, check, isString } from "./compliance-check";
+import { checkDefaultRules, check } from "./policy-check";
+import { isString, isBetween } from './policy-rules';
+
 describe("the policy check", () => {
   it("should not be compliant if a value with isString is empty", () => {
     const policy = [
