@@ -1,4 +1,6 @@
-import * as R from "ramda";
+import R from "ramda";
+
+import { isString, isBetween } from './policy-rules';
 
 const firstName = ["first_name"];
 const lastName = ["last_name"];
@@ -13,12 +15,7 @@ const addressCity = ["address", "city"];
 const addressPostalCode = ["address", "postal_code"];
 const addressState = ["address", "state"];
 
-const isEmpty = value => R.isNil(value) || R.isEmpty(value);
-const isBetween = (min, max) => value => {
-  return value >= min && value <= max;
-};
 
-export const isString = value => !isEmpty(value) && R.is(String, value);
 
 const rules = [
   {
@@ -77,7 +74,8 @@ export const check = policy => value => {
       const rules = R.is(Array, rule.predicate)
         ? rule.predicate
         : [rule.predicate];
-      const isValid = R.pathSatisfies(n => R.allPass(rules)(n), rule.path)(
+      const isValid = R.pathSatisfies(n => R.allPass(rules)(n) 
+        , rule.path)(
         value
       );
       if (!isValid) {
