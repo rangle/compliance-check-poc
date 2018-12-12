@@ -1,11 +1,12 @@
 {
+  "extends": "./tsconfig",
   "compilerOptions": {
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
-    "outDir": "build/es6",
+    "outDir": "build/commonjs",
     "sourceMap": true,
     "strict": true,
-    "target": "es6"
+    "target": "es5"
   }
 }

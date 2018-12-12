@@ -6,16 +6,20 @@
   "author": "Rangle.io",
   "license": "UNLICENSED",
   "private": true,
+  "bin": "./compliance-check",
+  "main": "./build/commonjs/index.js",
+  "module": "./build/es6/index.js",
   "scripts": {
     "prebuild": "rimraf ./build",
-    "build": "tsc",
-    "build:w": "tsc -w",
-    "pretest": "rimraf ./coverage",
-    "test": "jest",
-    "test:w": "jest --watch"
+    "build": "tsc && tsc -p tsconfig-commonjs.json",
+    "test:e2e": "npm run build && ./test-e2e.js",
+    "pretest:unit": "rimraf ./coverage",
+    "test:unit": "jest",
+    "test:unit:w": "jest --watch"
   },
   "devDependencies": {
     "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.12",
     "husky": "^1.2.0",
     "jest": "^23.6.0",
     "lint-staged": "^8.1.0",
@@ -41,14 +45,16 @@
       "**/*.{ts,tsx}",
       "!**/node_modules/**",
       "!**/coverage/**",
-      "!**/dist/**",
+      "!**/build/**",
+      "!**/index.ts",
       "!**/*.d.ts"
     ],
     "coverageDirectory": "coverage/",
     "coveragePathIgnorePatterns": [
       "/node_modules/",
       "/coverage/",
-      "/dist/"
+      "/build/",
+      "/test-cases"
     ],
     "coverageReporters": [
       "json",
@@ -64,9 +70,19 @@
         "statements": 90
       }
     },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/build/",
+      "/test-cases"
+    ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
+    "transformIgnorePatterns": [
+      "/node_modules/",
+      "/build/",
+      "/test-cases"
+    ],
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
       "ts",
