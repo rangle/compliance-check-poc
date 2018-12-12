@@ -1,26 +1,80 @@
 {
   "name": "stripe-compliance",
   "version": "0.1.0",
+  "description": "program to validate JSON as per Stripe's requirements",
+  "repository": "git@github.com:rangle/stripe-compliance-check-poc.git",
+  "author": "Rangle.io",
+  "license": "UNLICENSED",
   "private": true,
-  "dependencies": {
-    "ramda": "^0.26.1",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "prebuild": "rimraf ./build",
+    "build": "tsc",
+    "build:w": "tsc -w",
+    "pretest": "rimraf ./coverage",
+    "test": "jest",
+    "test:w": "jest --watch"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "devDependencies": {
+    "@types/jest": "^23.3.10",
+    "husky": "^1.2.0",
+    "jest": "^23.6.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.2"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --single-quote --write src/**/*.ts",
+      "git add"
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!**/node_modules/**",
+      "!**/coverage/**",
+      "!**/dist/**",
+      "!**/*.d.ts"
+    ],
+    "coverageDirectory": "coverage/",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/coverage/",
+      "/dist/"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "html"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 90
+      }
+    },
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
 }
