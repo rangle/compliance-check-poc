@@ -1,11 +1,13 @@
 {
-  "first_name": "Augustus",
-  "last_name": ["Gloop"],
-  "id": "",
-  "tax_id": "12-34-567",
-  "address": {
-    "country": "CA",
-    "street": "345 S Arden",
-    "city": "Edmonton"
-  }
+  "compliant": false,
+  "requirements": [
+    "first_name",
+    "last_name",
+    "id",
+    "tax_id",
+    "address.street",
+    "address.city",
+    "address.postal_code",
+    "address.country"
+  ]
 }

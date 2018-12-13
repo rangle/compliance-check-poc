@@ -9,9 +9,13 @@
   "bin": "./compliance-check",
   "main": "./build/commonjs/index.js",
   "module": "./build/es6/index.js",
+  "engines": {
+    "node": ">=8"
+  },
   "scripts": {
     "prebuild": "rimraf ./build",
     "build": "tsc && tsc -p tsconfig-commonjs.json",
+    "test": "npm run test:unit && npm run test:e2e",
     "test:e2e": "npm run build && ./test-e2e.js",
     "pretest:unit": "rimraf ./coverage",
     "test:unit": "jest",
