@@ -1,0 +1,9 @@
+{
+  "compliant": false,
+  "requirements": [
+    "last_name",
+    "tax_id",
+    "address.state",
+    "address.postal_code"
+  ]
+}
