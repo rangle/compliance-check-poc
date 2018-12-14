@@ -14,4 +14,15 @@ export interface ComplianceRule {
 export interface ComplianceOutput {
   compliant: boolean;
   requirements: string[];
+  past_due?: string[];
+}
+
+export interface ComplianceDb {
+  [key: string]: ComplianceRecord[];
+}
+
+export interface ComplianceRecord {
+  id: string;
+  timestamp: number;
+  requirements: string[];
 }

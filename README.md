@@ -16,11 +16,16 @@ JavaScript solution to Stripe compliance interview
 
 ## Library Usage
 
-The library can be consumed as an npm package and exposes one method: `checkCompliance`, which takes a JavaScript object to validate
+The library can be consumed as an npm package and exposes two methods:
+
+- `checkCompliance`, which takes a JavaScript object to validate
+- `submitDocument`, which takes a JavaScript object to validate and check against state
 
 ## CLI Usage
 
-The CLI program can be run (after building) with `./compliance-check /path/to/input.json`. The CLI program outputs the JSON results in the format:
+The CLI program can be run (after building) with one of two commands:
+
+- `./compliance-check check /path/to/input.json`. The CLI program outputs the JSON results in the format:
 
 ```json
 {
@@ -29,6 +34,17 @@ The CLI program can be run (after building) with `./compliance-check /path/to/in
 }
 ```
 
+- `./compliance-check submit /path/to/input.json`. The CLI program uses the flatfile `.compliance-db.json` to store state. Output is in the following format:
+
+```json
+{
+  "compliant": true,
+  "requirements": [],
+  "past_due": []
+}
+```
+
 ## Notes
 
 - Assumes that requirements must be in the same order as the given test cases
+- "Database" (flat file) is not safe for production for many, many reasons
