@@ -1,8 +1,8 @@
 {
-  "name": "stripe-compliance",
+  "name": "compliance-check-poc",
   "version": "0.1.0",
-  "description": "program to validate JSON as per Stripe's requirements",
-  "repository": "git@github.com:rangle/stripe-compliance-check-poc.git",
+  "description": "program to validate JSON as per compliance requirements",
+  "repository": "git@github.com:rangle/compliance-check-poc.git",
   "author": "Rangle.io",
   "license": "UNLICENSED",
   "private": true,
