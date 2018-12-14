@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "build/commonjs",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es5"
+  }
+}

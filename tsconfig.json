@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "build/es6",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6"
+  }
+}

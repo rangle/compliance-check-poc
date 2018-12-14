@@ -1,26 +1,100 @@
 {
   "name": "stripe-compliance",
   "version": "0.1.0",
+  "description": "program to validate JSON as per Stripe's requirements",
+  "repository": "git@github.com:rangle/stripe-compliance-check-poc.git",
+  "author": "Rangle.io",
+  "license": "UNLICENSED",
   "private": true,
-  "dependencies": {
-    "ramda": "^0.26.1",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+  "bin": "./compliance-check",
+  "main": "./build/commonjs/index.js",
+  "module": "./build/es6/index.js",
+  "engines": {
+    "node": ">=8"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "prebuild": "rimraf ./build",
+    "build": "tsc && tsc -p tsconfig-commonjs.json",
+    "test": "npm run test:unit && npm run test:e2e",
+    "test:e2e": "npm run build && ./test-e2e.js",
+    "pretest:unit": "rimraf ./coverage",
+    "test:unit": "jest",
+    "test:unit:w": "jest --watch"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "devDependencies": {
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.12",
+    "husky": "^1.2.0",
+    "jest": "^23.6.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.2"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,json,css,md}": [
+      "prettier --single-quote --write src/**/*.ts",
+      "git add"
+    ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx}",
+      "!**/node_modules/**",
+      "!**/coverage/**",
+      "!**/build/**",
+      "!**/index.ts",
+      "!**/*.d.ts"
+    ],
+    "coverageDirectory": "coverage/",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/coverage/",
+      "/build/",
+      "/test-cases"
+    ],
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "html"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 90
+      }
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/build/",
+      "/test-cases"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/",
+      "/build/",
+      "/test-cases"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
 }

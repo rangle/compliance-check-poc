@@ -1,44 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Stripe Compliance Check PoC
 
-## Available Scripts
+JavaScript solution to Stripe compliance interview
 
-In the project directory, you can run:
+(assumes familiarity with yarn or npm)
 
-### `npm start`
+## Commands/Setup
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Installation can be done with a `yarn install` or an `npm install`
+- Unit tests are run with a `yarn test:unit` or `npm run test:unit`, unit tests produce a coverage artifact
+- `yarn test:unit:w` or `npm run test:unit:w` will run the unit tests in watch mode
+- e2e test are run with a `yarn test:e2e` or `npm run test:e2e`
+- To debug e2e tests set the environment variable `debug` to any truthy value
+- `yarn test` or `npm run test` will run the unit tests, and then the e2e tests. Useful for CI.
+- Builds can be produced with a `yarn build`, which produces a distributable `npm` package which can be consumed as a library or as a CLI tool
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Library Usage
 
-### `npm test`
+The library can be consumed as an npm package and exposes one method: `checkCompliance`, which takes a JavaScript object to validate
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## CLI Usage
 
-### `npm run build`
+The CLI program can be run (after building) with `./compliance-check /path/to/input.json`. The CLI program outputs the JSON results in the format:
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```json
+{
+  "compliant": true,
+  "requirements": []
+}
+```
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Notes
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Assumes that requirements must be in the same order as the given test cases

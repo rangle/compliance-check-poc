@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+var readFileSync = require('fs').readFileSync;
+var main = require('./build/commonjs/cli').main;
+
+main(process.argv, process.exit.bind(process), readFileSync);
