@@ -1,6 +1,6 @@
-# Stripe Compliance Check PoC
+# Compliance Check PoC
 
-JavaScript solution to Stripe compliance interview
+JavaScript solution to compliance interview
 
 (assumes familiarity with yarn or npm)
 
